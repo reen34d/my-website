@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الثانوية 139 - النظام الإداري</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
     <style>
+        /* كل الCSS الأصلي بدون تغيير */
         * {
             margin: 0;
             padding: 0;
@@ -415,7 +417,7 @@
             margin: 8px 0;
         }
 
-        /* قسم الطالبات */
+        /* قسم الطالبات - تصميم خرافي */
         .students-tabs {
             display: flex;
             justify-content: center;
@@ -458,7 +460,7 @@
 
         .students-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 25px;
         }
 
@@ -474,16 +476,18 @@
         .student-card {
             background: white;
             border-radius: 20px;
-            padding: 25px;
+            padding: 30px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
+            border: 3px solid transparent;
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
         }
 
         body.dark-mode .student-card {
-            background: #34495e;
+            background: linear-gradient(135deg, #34495e, #2c3e50);
             color: white;
         }
 
@@ -494,35 +498,145 @@
             left: 0;
             width: 100%;
             height: 5px;
+            background: linear-gradient(90deg, #FF6B6B, #4ECDC4, #45B7D1);
+            transition: all 0.4s ease;
         }
 
         .student-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            border-color: #4ECDC4;
+        }
+
+        .student-card:hover::before {
+            height: 8px;
+            background: linear-gradient(90deg, #FF6B6B, #FFA500, #4ECDC4);
         }
 
         .student-avatar {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
-            margin: 0 auto 15px;
+            margin: 0 auto 20px;
             background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.5rem;
-            border: 3px solid white;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            font-size: 2rem;
+            border: 4px solid white;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .student-card:hover .student-avatar {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 15px 30px rgba(255, 107, 107, 0.4);
+        }
+
+        .student-avatar::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+        }
+
+        .student-card:hover .student-avatar::before {
+            animation: shine 1.5s ease-in-out;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
         body.dark-mode .student-avatar {
             border-color: #34495e;
         }
 
-        .student-card.gold::before { background: linear-gradient(90deg, #FFD700, #FFA500); }
-        .student-card.silver::before { background: linear-gradient(90deg, #C0C0C0, #808080); }
-        .student-card.bronze::before { background: linear-gradient(90deg, #CD7F32, #8B4513); }
+        .student-info {
+            margin: 15px 0;
+        }
+
+        .student-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .student-grade {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        body.dark-mode .student-grade {
+            color: #ecf0f1;
+        }
+
+        .motivation-text {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 12px;
+            border-radius: 15px;
+            font-style: italic;
+            color: #555;
+            font-size: 0.95rem;
+            margin-top: 15px;
+            border-right: 4px solid #4ECDC4;
+            transition: all 0.3s ease;
+        }
+
+        .student-card:hover .motivation-text {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            transform: scale(1.02);
+        }
+
+        body.dark-mode .motivation-text {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: #ecf0f1;
+        }
+
+        .student-card.gold {
+            background: linear-gradient(135deg, #fffaf0, #fff8e1);
+            border: 3px solid #FFD700;
+        }
+
+        .student-card.gold::before {
+            background: linear-gradient(90deg, #FFD700, #FFA500, #FF8C00);
+        }
+
+        .student-card.silver {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border: 3px solid #C0C0C0;
+        }
+
+        .student-card.silver::before {
+            background: linear-gradient(90deg, #C0C0C0, #A9A9A9, #808080);
+        }
+
+        .student-card.bronze {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            border: 3px solid #CD7F32;
+        }
+
+        .student-card.bronze::before {
+            background: linear-gradient(90deg, #CD7F32, #8B4513, #A0522D);
+        }
 
         /* قسم المنصات */
         .platforms-grid {
@@ -667,10 +781,10 @@
             font-weight: 600;
         }
 
-        /* قسم الأخبار */
+        /* قسم الأخبار - تصميم خرافي */
         .news-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
             gap: 30px;
         }
 
@@ -680,6 +794,7 @@
             overflow: hidden;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
             transition: all 0.4s ease;
+            position: relative;
         }
 
         body.dark-mode .news-card {
@@ -688,7 +803,7 @@
         }
 
         .news-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) scale(1.02);
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
         }
 
@@ -702,17 +817,83 @@
             font-size: 48px;
             position: relative;
             overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .news-card:hover .news-image {
+            transform: scale(1.05);
+        }
+
+        .news-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+            transition: all 0.4s ease;
+        }
+
+        .news-card:hover .news-image::before {
+            background: linear-gradient(45deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
         }
 
         .news-content {
-            padding: 25px;
+            padding: 30px;
+            position: relative;
         }
 
         .news-date {
             color: #4ECDC4;
             font-size: 14px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .news-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            line-height: 1.4;
+        }
+
+        body.dark-mode .news-title {
+            color: #ecf0f1;
+        }
+
+        .news-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        body.dark-mode .news-description {
+            color: #bdc3c7;
+        }
+
+        .news-btn {
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .news-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
         }
 
         /* قسم التواصل */
@@ -751,15 +932,23 @@
             background-clip: text;
         }
 
-        /* الإعدادات */
+        /* الإعدادات - تصميم خرافي */
         .settings-option {
             background: white;
-            padding: 25px;
-            margin-bottom: 20px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
             max-width: 500px;
-            margin: 20px auto;
+            margin: 25px auto;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .settings-option:hover {
+            transform: translateY(-5px);
+            border-color: #4ECDC4;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
 
         body.dark-mode .settings-option {
@@ -767,15 +956,36 @@
             color: white;
         }
 
+        .settings-option h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        body.dark-mode .settings-option h3 {
+            color: #ecf0f1;
+        }
+
         .settings-option select {
             width: 100%;
-            padding: 12px;
-            border-radius: 10px;
+            padding: 15px;
+            border-radius: 12px;
             border: 2px solid #e0e0e0;
             background: white;
             color: #333;
             margin-top: 10px;
             transition: all 0.3s ease;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .settings-option select:focus {
+            border-color: #4ECDC4;
+            box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.1);
+            transform: scale(1.02);
         }
 
         body.dark-mode .settings-option select {
@@ -784,27 +994,54 @@
             border-color: #34495e;
         }
 
-        .settings-option select:focus {
-            border-color: #4ECDC4;
-            box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.1);
+        .language-option {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .language-option:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        body.dark-mode .language-option {
+            background: #2c3e50;
+        }
+
+        body.dark-mode .language-option:hover {
+            background: #34495e;
+        }
+
+        .language-option input[type="radio"] {
+            transform: scale(1.2);
         }
 
         .btn {
-            padding: 12px 30px;
+            padding: 15px 35px;
             background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s ease;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
             text-decoration: none;
+            font-size: 1.1rem;
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.4);
         }
 
         .btn-secondary {
@@ -971,9 +1208,9 @@
             }
             
             .student-avatar {
-                width: 70px;
-                height: 70px;
-                font-size: 1.3rem;
+                width: 80px;
+                height: 80px;
+                font-size: 1.5rem;
             }
         }
 
@@ -1067,9 +1304,9 @@
             }
             
             .student-avatar {
-                width: 65px;
-                height: 65px;
-                font-size: 1.2rem;
+                width: 70px;
+                height: 70px;
+                font-size: 1.3rem;
             }
             
             .settings-option {
@@ -1078,7 +1315,7 @@
             }
             
             .btn {
-                padding: 10px 25px;
+                padding: 12px 25px;
                 font-size: 14px;
             }
         }
@@ -1160,6 +1397,414 @@
                 max-width: 1320px;
             }
         }
+
+        /* ========== الإضافات الجديدة ========== */
+        
+        /* قسم المبدعين */
+        .creators-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .creator-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid transparent;
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+        }
+
+        body.dark-mode .creator-card {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+        }
+
+        .creator-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #FF6B6B, #4ECDC4, #45B7D1);
+        }
+
+        .creator-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            border-color: #4ECDC4;
+        }
+
+        .creator-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* قسم قواعد السلوك */
+        .rules-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .rules-container {
+            background: #34495e;
+            color: white;
+        }
+
+        .rule-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 15px;
+            background: #f8f9fa;
+            border-right: 4px solid #4ECDC4;
+        }
+
+        body.dark-mode .rule-section {
+            background: #2c3e50;
+        }
+
+        .rule-title {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        body.dark-mode .rule-title {
+            color: #ecf0f1;
+        }
+
+        /* جدول الاختبارات */
+        .exam-table {
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+        }
+
+        body.dark-mode .exam-table {
+            background: #34495e;
+        }
+
+        .exam-table th {
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .exam-table td {
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        body.dark-mode .exam-table td {
+            border-bottom: 1px solid #2c3e50;
+        }
+
+        .exam-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        body.dark-mode .exam-table tr:hover {
+            background: #2c3e50;
+        }
+
+        /* الإعلانات الجديدة */
+        .advertisement-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        body.dark-mode .advertisement-card {
+            background: #34495e;
+            color: white;
+        }
+
+        .advertisement-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .ad-image {
+            height: 200px;
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4, #45B7D1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ad-content {
+            padding: 25px;
+        }
+
+        .ad-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #2c3e50;
+        }
+
+        body.dark-mode .ad-title {
+            color: #ecf0f1;
+        }
+
+        .ad-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        body.dark-mode .ad-description {
+            color: #bdc3c7;
+        }
+
+        /* اللغات في الإعدادات */
+        .language-options {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .language-option {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        /* ========== التحديثات الجديدة ========== */
+        
+        /* الشرائح للمبدعين */
+        .creators-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .creator-tab-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            background: white;
+            color: #333;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .creator-tab-btn {
+            background: #34495e;
+            color: white;
+        }
+
+        .creator-tab-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .creator-tab-btn.active {
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .creator-category {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .creator-category.active {
+            display: block;
+        }
+
+        /* تصميم Swiper للشرائح */
+        .swiper {
+            width: 100%;
+            height: 400px;
+            border-radius: 20px;
+            margin: 20px 0;
+        }
+
+        .swiper-slide {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark-mode .swiper-slide {
+            background: #34495e;
+            color: white;
+        }
+
+        .swiper-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #FF6B6B, #4ECDC4, #45B7D1);
+        }
+
+        .creator-slide-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+            border: 5px solid white;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        body.dark-mode .creator-slide-avatar {
+            border-color: #34495e;
+        }
+
+        .creator-slide-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .creator-slide-quote {
+            font-style: italic;
+            color: #666;
+            margin-top: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-right: 4px solid #4ECDC4;
+        }
+
+        body.dark-mode .creator-slide-quote {
+            background: #2c3e50;
+            color: #ecf0f1;
+        }
+
+        /* أزرار التنقل في Swiper */
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: #4ECDC4;
+            background: rgba(255, 255, 255, 0.9);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .swiper-button-next:after,
+        .swiper-button-prev:after {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* القواعد واللوائح المحدثة */
+        .rules-content {
+            max-height: 600px;
+            overflow-y: auto;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        body.dark-mode .rules-content {
+            background: #2c3e50;
+        }
+
+        .rules-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .rules-section {
+            background: #34495e;
+        }
+
+        .rules-section h4 {
+            color: #4ECDC4;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rules-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .rules-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        body.dark-mode .rules-list li {
+            border-bottom: 1px solid #2c3e50;
+        }
+
+        .rules-list li:before {
+            content: '•';
+            color: #4ECDC4;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
     </style>
 </head>
 <body>
@@ -1184,10 +1829,12 @@
                     <li><a href="#" class="nav-link" data-section="management">👑 الإدارة</a></li>
                     <li><a href="#" class="nav-link" data-section="teachers">👩‍🏫 هيئة التدريس</a></li>
                     <li><a href="#" class="nav-link" data-section="students">👩‍🎓 الطالبات</a></li>
+                    <li><a href="#" class="nav-link" data-section="creators">🌟 المبدعين</a></li>
                     <li><a href="#" class="nav-link" data-section="achievements">🏆 الإنجازات</a></li>
                     <li><a href="#" class="nav-link" data-section="events">🎉 الفعاليات</a></li>
                     <li><a href="#" class="nav-link" data-section="platforms">🌐 المنصات</a></li>
                     <li><a href="#" class="nav-link" data-section="news">📰 آخر الأخبار</a></li>
+                    <li><a href="#" class="nav-link" data-section="rules">📋 القواعد واللوائح</a></li>
                     <li><a href="#" class="nav-link" data-section="contact">📞 تواصل معنا</a></li>
                     <li><a href="#" class="nav-link" data-section="settings">⚙️ الإعدادات</a></li>
                 </ul>
@@ -1195,7 +1842,6 @@
         </div>
     </header>
 
-    <!-- باقي الأقسام تبقى كما هي بدون تغيير -->
     <!-- الصفحة الرئيسية -->
     <section id="home" class="active">
         <div class="container">
@@ -1253,7 +1899,6 @@
         </div>
     </section>
 
-    <!-- باقي الأقسام تبقى كما هي بدون تغيير -->
     <!-- الإدارة -->
     <section id="management">
         <div class="container">
@@ -1278,28 +1923,72 @@
         </div>
     </section>
 
-    <!-- الطالبات -->
+    <!-- الطالبات - تصميم خرافي -->
     <section id="students">
         <div class="container">
             <h2 class="section-title">👩‍🎓 الطالبات</h2>
-            <p class="section-subtitle">تعرف على أبرز طالباتنا حسب الفئة</p>
+            <p class="section-subtitle">✨ نفتخر بتميز طالباتنا في جميع المجالات ✨</p>
 
             <div class="students-tabs">
-                <button class="tab-btn active" data-category="excellent">🏆 المتفوقات</button>
-                <button class="tab-btn" data-category="creative">💡 المبدعات</button>
-                <button class="tab-btn" data-category="attendance">⏰ المواظبات</button>
+                <button class="tab-btn active" data-category="disciplined">🎯 المنظبطات</button>
+                <button class="tab-btn" data-category="excellent">🏆 المتفوقات</button>
             </div>
 
-            <div id="excellent" class="students-grid student-category active">
-                <!-- سيتم تعبئة المتفوقات -->
+            <!-- الطالبات المنظبطات -->
+            <div id="disciplined" class="students-grid student-category active">
+                <!-- سيتم تعبئة الطالبات باستخدام JavaScript -->
             </div>
 
-            <div id="creative" class="students-grid student-category">
-                <!-- سيتم تعبئة المبدعات -->
+            <!-- المتفوقات - تصميم خرافي -->
+            <div id="excellent" class="students-grid student-category">
+                <!-- سيتم تعبئة المتفوقات باستخدام JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المبدعين الجديد - محدث -->
+    <section id="creators">
+        <div class="container">
+            <h2 class="section-title">🌟 المبدعين</h2>
+            <p class="section-subtitle">مساحة للإبداع والتميز والابتكار</p>
+
+            <div class="creators-tabs">
+                <button class="creator-tab-btn active" data-creator-category="art">🎨 الإبداع الفني</button>
+                <button class="creator-tab-btn" data-creator-category="programming">💻 البرمجة والتقنية</button>
+                <button class="creator-tab-btn" data-creator-category="writing">✍️ الكتابة الإبداعية</button>
             </div>
 
-            <div id="attendance" class="students-grid student-category">
-                <!-- سيتم تعبئة المواظبات -->
+            <!-- الإبداع الفني -->
+            <div id="art" class="creator-category active">
+                <div class="swiper artSwiper">
+                    <div class="swiper-wrapper">
+                        <!-- سيتم تعبئة الشرائح باستخدام JavaScript -->
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            </div>
+
+            <!-- البرمجة والتقنية -->
+            <div id="programming" class="creator-category">
+                <div class="swiper programmingSwiper">
+                    <div class="swiper-wrapper">
+                        <!-- سيتم تعبئة الشرائح باستخدام JavaScript -->
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            </div>
+
+            <!-- الكتابة الإبداعية -->
+            <div id="writing" class="creator-category">
+                <div class="swiper writingSwiper">
+                    <div class="swiper-wrapper">
+                        <!-- سيتم تعبئة الشرائح باستخدام JavaScript -->
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
             </div>
         </div>
     </section>
@@ -1346,21 +2035,27 @@
 
             <div class="events-grid">
                 <div class="event-card">
-                    <h3>اليوم الوطني</h3>
-                    <p>احتفال باليوم الوطني للمملكة العربية السعودية</p>
-                    <span class="event-date">23 سبتمبر</span>
+                    <h3>يوم المعلم 💫💫</h3>
+                    <p>احتفال تكريمي لمعلمات المدرسة تقديراً لجهودهن المتميزة</p>
+                    <span class="event-date">قريباً</span>
                 </div>
                 
                 <div class="event-card">
-                    <h3>مسابقة الروبوتات</h3>
-                    <p>مسابقة تصميم وبرمجة الروبوتات للطالبات</p>
-                    <span class="event-date">15 أكتوبر</span>
+                    <h3>نشاط البوليفارد وورلد</h3>
+                    <p>فعالية ترفيهية مجانية 100% - الزي ساتر طويل محتشم</p>
+                    <span class="event-date">قريباً</span>
                 </div>
                 
                 <div class="event-card">
-                    <h3>معرض العلوم</h3>
-                    <p>عرض المشاريع العلمية والإبداعية للطالبات</p>
-                    <span class="event-date">30 نوفمبر</span>
+                    <h3>جلسات الأولمبياد الوطني</h3>
+                    <p>جلسات تدريبية للطالبات المسجلات في الأولمبياد الوطني للإبداع العلمي</p>
+                    <span class="event-date">مستمر</span>
+                </div>
+
+                <div class="event-card">
+                    <h3>مسابقة موهبة</h3>
+                    <p>فرصة للطالبات للانضمام لفصول الموهوبات واجتياز مقياس موهبة</p>
+                    <span class="event-date">مستمر</span>
                 </div>
             </div>
         </div>
@@ -1403,43 +2098,282 @@
         </div>
     </section>
 
-    <!-- آخر الأخبار -->
+    <!-- آخر الأخبار - محدث -->
     <section id="news">
         <div class="container">
             <h2 class="section-title">📰 آخر الأخبار</h2>
-            <p class="section-subtitle">أحدث المستجدات والأخبار المدرسية</p>
+            <p class="section-subtitle">أحدث المستجدات والأخبار والإعلانات المدرسية</p>
 
             <div class="news-grid">
-                <div class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-graduation-cap"></i>
+                <!-- جدول الاختبارات -->
+                <div class="advertisement-card">
+                    <div class="ad-image" style="background: linear-gradient(135deg, #FF6B6B, #4ECDC4);">
+                        <i class="fas fa-calendar-alt"></i>
                     </div>
-                    <div class="news-content">
-                        <div class="news-date">15 مارس 2024</div>
-                        <h3>حفل تخريج الدفعة 34</h3>
-                        <p>بحضور مسؤولي التعليم، تم تكريم 120 خريجة من المدرسة</p>
-                    </div>
-                </div>
-
-                <div class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <div class="news-content">
-                        <div class="news-date">10 مارس 2024</div>
-                        <h3>انطلاق مسابقة الروبوتات</h3>
-                        <p>انطلاق المسابقة السنوية لتصميم وبرمجة الروبوتات</p>
+                    <div class="ad-content">
+                        <h3 class="ad-title">جدول اختبارات الفترة الأولى</h3>
+                        <p class="ad-description">جدول اختبارات الفصل الدراسي الأول لجميع المراحل - الفترة الأولى 1447 هـ</p>
+                        <a href="#" class="news-btn" onclick="showExamTable()">📊 مشاهده جدول الاختبارات</a>
                     </div>
                 </div>
 
-                <div class="news-card">
-                    <div class="news-image">
-                        <i class="fas fa-chart-line"></i>
+                <!-- الإعلانات الجديدة -->
+                <div class="advertisement-card">
+                    <div class="ad-image" style="background: linear-gradient(135deg, #45B7D1, #96CEB4);">
+                        <i class="fas fa-hands-helping"></i>
                     </div>
-                    <div class="news-content">
-                        <div class="news-date">5 مارس 2024</div>
-                        <h3>نتائج الفصل الأول</h3>
-                        <p>إعلان نتائج الفصل الأول بنسبة نجاح 97.5%</p>
+                    <div class="ad-content">
+                        <h3 class="ad-title">رفق: العنصرية والتنمر</h3>
+                        <p class="ad-description">مبادرة للحد من التنمر والعنصرية وتعزيز قيم التسامح والاحترام بين الطالبات</p>
+                        <a href="https://t.me/c/1583933397/3930" target="_blank" class="news-btn">📱 مشاهده الاذاعة</a>
+                    </div>
+                </div>
+
+                <div class="advertisement-card">
+                    <div class="ad-image" style="background: linear-gradient(135deg, #FFD700, #FFA500);">
+                        <i class="fas fa-hands"></i>
+                    </div>
+                    <div class="ad-content">
+                        <h3 class="ad-title">عن فئة الصم والبكم</h3>
+                        <p class="ad-description">توعية بخصوص فئة الصم والبكم وكيفية التواصل معهم ودعم اندماجهم في المجتمع</p>
+                        <a href="https://t.me/c/1583933397/3927" target="_blank" class="news-btn">📱 مشاهده الاذاعة</a>
+                    </div>
+                </div>
+
+                <div class="advertisement-card">
+                    <div class="ad-image" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="ad-content">
+                        <h3 class="ad-title">الأسبوع العالمي للفضاء</h3>
+                        <p class="ad-description">فعاليات وأنشطة للاحتفال بالأسبوع العالمي للفضاء واستكشاف علوم الفلك</p>
+                        <a href="https://t.me/c/1583933397/3920" target="_blank" class="news-btn">📱 مشاهده الاذاعة</a>
+                    </div>
+                </div>
+
+                <div class="advertisement-card">
+                    <div class="ad-image" style="background: linear-gradient(135deg, #4ECDC4, #45B7D1);">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <div class="ad-content">
+                        <h3 class="ad-title">تكريم الطالبة رنا لمعلماتها</h3>
+                        <p class="ad-description">تكريم مميز من الطالبة رنا لمعلماتها تقديراً لجهودهن في العملية التعليمية</p>
+                        <a href="https://t.me/c/1583933397/3919" target="_blank" class="news-btn">📱 مشاهده الاذاعة</a>
+                    </div>
+                </div>
+
+                <div class="advertisement-card">
+                    <div class="ad-image" style="background: linear-gradient(135deg, #FF6B6B, #FFA500);">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <div class="ad-content">
+                        <h3 class="ad-title">يوم المعلم</h3>
+                        <p class="ad-description">احتفال بيوم المعلم العالمي وتكريم الجهود المتميزة لكوادرنا التعليمية</p>
+                        <a href="https://t.me/c/1583933397/3910" target="_blank" class="news-btn">📱 مشاهده الاذاعة</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- جدول الاختبارات المخفي -->
+            <div id="examTableModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center;">
+                <div style="background: white; padding: 30px; border-radius: 20px; max-width: 90%; max-height: 90%; overflow: auto; position: relative;">
+                    <button onclick="closeExamTable()" style="position: absolute; top: 15px; left: 15px; background: #FF6B6B; color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 20px; cursor: pointer;">✕</button>
+                    <h3 style="text-align: center; margin-bottom: 20px; color: #2c3e50;">جدول اختبارات الفترة الأولى - الفصل الدراسي الأول 1447 هـ</h3>
+                    <div class="exam-table">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr>
+                                    <th>اليوم التاريخ</th>
+                                    <th>الصف الأول ثانوي</th>
+                                    <th>الصف الثاني ثانوي</th>
+                                    <th>الصف الثالث ثانوي</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>الاثنين 1447/4/16</td>
+                                    <td>الرياضيات</td>
+                                    <td>التاريخ</td>
+                                    <td>التربية الصحية والبدنية</td>
+                                </tr>
+                                <tr>
+                                    <td>الثلاثاء 1447/4/17</td>
+                                    <td>الأحياء</td>
+                                    <td>الكيمياء</td>
+                                    <td>الكيمياء</td>
+                                </tr>
+                                <tr>
+                                    <td>الأربعاء 1447/4/18</td>
+                                    <td>الكفايات اللغوية</td>
+                                    <td>الأحياء</td>
+                                    <td>علم الأرض والفضاء</td>
+                                </tr>
+                                <tr>
+                                    <td>الخميس 1447/4/19</td>
+                                    <td>التفكير الناقد</td>
+                                    <td>الكفايات اللغوية</td>
+                                    <td>التنمية المستدامة</td>
+                                </tr>
+                                <tr>
+                                    <td>الأحد 1447/4/22</td>
+                                    <td>التقنية الرقمية</td>
+                                    <td>الرياضيات</td>
+                                    <td>اللغة الإنجليزية</td>
+                                </tr>
+                                <tr>
+                                    <td>الاثنين 1447/4/23</td>
+                                    <td>اللغة الإنجليزية</td>
+                                    <td>الفيزياء</td>
+                                    <td>الفيزياء</td>
+                                </tr>
+                                <tr>
+                                    <td>الثلاثاء 1447/4/24</td>
+                                    <td>التفسير</td>
+                                    <td>اللغة الإنجليزية</td>
+                                    <td>التقنية الرقمية</td>
+                                </tr>
+                                <tr>
+                                    <td>الأربعاء 1447/4/25</td>
+                                    <td>التربية الصحية والبدنية</td>
+                                    <td>   ..............  </td>
+                                    <td> الرياضياتtd>
+                                </tr>
+                                                                <tr>
+                                    <td>الخميس  1447/4/25</td>
+                                    <td> كيمياء  </td>
+                                    <td>   ..............  </td>
+                                    <td>  البحث والمصادر    </td> 
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 10px;">
+                        <h4 style="color: #2c3e50; margin-bottom: 10px;">أهم التعليمات:</h4>
+                        <ul style="color: #666; line-height: 1.6;">
+                            <li>الحضور والالتزام بالمواعيد المحددة للاختبار</li>
+                            <li>يمنع الاختبار قبل وقته أو الاستئناف</li>
+                            <li>الالتزام بالزي المدرسي خلال أيام الاختبارات</li>
+                            <li>إحضار الأدوات المطلوبة لكل مادة</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم القواعد واللوائح الجديد - محدث -->
+    <section id="rules">
+        <div class="container">
+            <h2 class="section-title">📋 القواعد واللوائح</h2>
+            <p class="section-subtitle">دليل الطالبات للسلوك والمواظبة والأنظمة المدرسية</p>
+
+            <div class="rules-container">
+                <h3 style="text-align: center; margin-bottom: 30px; color: #4ECDC4;">قواعد السلوك والمواظبة - الإصدار الخامس 1447 هـ</h3>
+                
+                <div class="rules-content">
+                    <!-- التعريفات -->
+                    <div class="rules-section">
+                        <h4><i class="fas fa-book"></i> التعريفات</h4>
+                        <ul class="rules-list">
+                            <li><strong>الزي المدرسي:</strong> الزي المعتمد من الوزارة للتعليم الحكومي أو الخاص</li>
+                            <li><strong>السلوك المتميز:</strong> السلوك الذي يعكس الممارسات المتميزة المنسجمة مع القيم الإسلامية والهوية الوطنية</li>
+                            <li><strong>التنمر:</strong> استهداف طالب معين أو طلاب معينين بصورة متكررة باستخدام أساليب غير مرغوبة</li>
+                            <li><strong>السلوك الإيجابي:</strong> السلوك المتوقع من الطالب والذي يتسق مع الأهداف والقيم واللوائح والنظم التربوية</li>
+                            <li><strong>تعزيز السلوك:</strong> الإجراء التربوي الذي يتخذ بعد حدوث سلوك معين، بهدف دعمه إذا كان إيجابياً</li>
+                            <li><strong>التحرش الجنسي:</strong> أي قول أو فعل أو إشارة ذات مدلول جنسي تصدر من طالب تجاه أي طالب آخر</li>
+                            <li><strong>التأخر الصباحي:</strong> تأخر الطالب عن الحضور إلى المدرسة في الوقت المحدد</li>
+                            <li><strong>المواظبة:</strong> التزام الطالب بالحضور إلى المدرسة أو من خلال المنصات التعليمية المعتمدة</li>
+                        </ul>
+                    </div>
+
+                    <!-- أهداف القواعد -->
+                    <div class="rules-section">
+                        <h4><i class="fas fa-bullseye"></i> أهداف قواعد السلوك والمواظبة</h4>
+                        <ul class="rules-list">
+                            <li>ضبط السلوك والمواظبة لدى طلبة التعليم العام بما يتوافق مع المبادئ الإسلامية والقيم الأخلاقية</li>
+                            <li>ترسيخ المبادئ الإسلامية وتعزيز الهوية الوطنية لدى الطلبة</li>
+                            <li>تعزيز القيم وتنمية الاتجاهات السلوكية الإيجابية لدى الطلبة</li>
+                            <li>تعزيز قيم التعامل الرقمي لدى الطلبة أثناء تعلمهم عن بعد</li>
+                            <li>تهيئة البيئة التعليمية والتربوية المناسبة للطلبة ومنسوبي المدرسة</li>
+                            <li>إيجاد مرجعية ضابطة للعاملين في الميدان التربوي</li>
+                        </ul>
+                    </div>
+
+                    <!-- تقييم السلوك -->
+                    <div class="rules-section">
+                        <h4><i class="fas fa-chart-bar"></i> تقييم السلوك</h4>
+                        <ul class="rules-list">
+                            <li>التقدير الكيفي لسلوك الصفين الأول والثاني الابتدائي</li>
+                            <li>السلوك مادة مستقلة من الصف الثالث الابتدائي إلى الصف الثالث الثانوي (100 درجة)</li>
+                            <li>السلوك الإيجابي: 80% من إجمالي درجة السلوك (80 درجة تلقائية)</li>
+                            <li>السلوك المتميز: 20% من إجمالي درجة السلوك</li>
+                            <li>يتاح للطالب فرص تعويض الدرجات المحسومة من السلوك الإيجابي</li>
+                        </ul>
+                    </div>
+
+                    <!-- المشكلات السلوكية -->
+                    <div class="rules-section">
+                        <h4><i class="fas fa-exclamation-triangle"></i> المشكلات السلوكية</h4>
+                        <div style="overflow-x: auto;">
+                            <table class="exam-table" style="min-width: 600px;">
+                                <tr>
+                                    <th>الدرجة</th>
+                                    <th>الدرجات المحسومة</th>
+                                    <th>أمثلة على المشكلات</th>
+                                </tr>
+                                <tr>
+                                    <td>الأولى</td>
+                                    <td>درجة واحدة</td>
+                                    <td>عدم التقيد بالزي المدرسي، التأخر الصباحي</td>
+                                </tr>
+                                <tr>
+                                    <td>الثانية</td>
+                                    <td>درجتان</td>
+                                    <td>عدم حضور الحصة الدراسية، إثارة القوضى</td>
+                                </tr>
+                                <tr>
+                                    <td>الثالثة</td>
+                                    <td>ثلاث درجات</td>
+                                    <td>إلحاق الضرر المتعمد بممتلكات المدرسة</td>
+                                </tr>
+                                <tr>
+                                    <td>الرابعة</td>
+                                    <td>عشر درجات</td>
+                                    <td>التدخين، التحرش الجنسي، التنمر</td>
+                                </tr>
+                                <tr>
+                                    <td>الخامسة</td>
+                                    <td>خمس عشرة درجة</td>
+                                    <td>الإساءة للدولة أو رموزها، تعاطي المخدرات</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- تقييم المواظبة -->
+                    <div class="rules-section">
+                        <h4><i class="fas fa-calendar-check"></i> تقييم المواظبة</h4>
+                        <ul class="rules-list">
+                            <li>اعتماد التقدير الكيفي للصفين الأول والثاني الابتدائي</li>
+                            <li>تخصيص 10 درجات للمواظبة من الصف الثالث الابتدائي إلى الثالث الثانوي</li>
+                            <li>حرمان الطالب من الانتقال في حال تجاوز نسبة الغياب بدون عذر 10% خلال العام</li>
+                            <li>إدخال الغياب يومياً في المنصات المعتمدة (نظام نور - منصة مدرستي)</li>
+                            <li>إعطاء مهلة 3 أيام عمل بعد الغياب لتقديم العذر</li>
+                        </ul>
+                    </div>
+
+                    <!-- آداب السلوك الرقمي -->
+                    <div class="rules-section">
+                        <h4><i class="fas fa-laptop-code"></i> آداب السلوك الرقمي</h4>
+                        <ul class="rules-list">
+                            <li>الالتزام بآداب التعامل الرقمي في المنصات التعليمية</li>
+                            <li>الحضور والانصراف في الوقت المحدد للحصص الافتراضية</li>
+                            <li>تجنب نشر البيانات الشخصية أو مشاركتها</li>
+                            <li>استخدام وسائل التواصل الإلكترونية الرسمية المعتمدة</li>
+                            <li>الحفاظ على سرية اسم المستخدم وكلمة المرور</li>
+                            <li>تجنب التعامل مع الروابط المجهولة</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -1480,11 +2414,25 @@
         </div>
     </section>
 
-    <!-- الإعدادات -->
+    <!-- الإعدادات - محدث -->
     <section id="settings">
         <div class="container">
             <h2 class="section-title">⚙️ الإعدادات</h2>
             <p class="section-subtitle">تخصيص تجربة التصفح حسب تفضيلاتك</p>
+
+            <div class="settings-option">
+                <h3>🌐 اللغة / Language</h3>
+                <div class="language-options">
+                    <div class="language-option">
+                        <input type="radio" id="arabic" name="language" value="ar" checked>
+                        <label for="arabic">العربية 🇸🇦</label>
+                    </div>
+                    <div class="language-option">
+                        <input type="radio" id="english" name="language" value="en">
+                        <label for="english">English 🇺🇸</label>
+                    </div>
+                </div>
+            </div>
 
             <div class="settings-option">
                 <h3>🌙 الوضع الليلي</h3>
@@ -1511,13 +2459,358 @@
                 </select>
             </div>
 
-            <div style="text-align: center; margin-top: 30px;">
-                <button class="btn" onclick="saveSettings()">💾 حفظ الإعدادات</button>
+            <div style="text-align: center; margin-top: 40px;">
+                <button class="btn" onclick="saveSettings()">
+                    <i class="fas fa-save"></i> 💾 حفظ الإعدادات
+                </button>
             </div>
         </div>
     </section>
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script>
+        // بيانات الترجمة
+        const translations = {
+            ar: {
+                schoolName: "الثانوية 139",
+                home: "🏠 الرئيسية",
+                management: "👑 الإدارة", 
+                teachers: "👩‍🏫 هيئة التدريس",
+                students: "👩‍🎓 الطالبات",
+                creators: "🌟 المبدعين",
+                achievements: "🏆 الإنجازات",
+                events: "🎉 الفعاليات",
+                platforms: "🌐 المنصات",
+                news: "📰 آخر الأخبار",
+                rules: "📋 القواعد واللوائح",
+                contact: "📞 تواصل معنا",
+                settings: "⚙️ الإعدادات",
+                homeTitle: "🏠 الرئيسية",
+                managementTitle: "👑 الإدارة المدرسية",
+                teachersTitle: "👩‍🏫 هيئة التدريس",
+                studentsTitle: "👩‍🎓 الطالبات", 
+                creatorsTitle: "🌟 المبدعين",
+                achievementsTitle: "🏆 الإنجازات",
+                eventsTitle: "🎉 الفعاليات",
+                platformsTitle: "🌐 المنصات الإلكترونية",
+                newsTitle: "📰 آخر الأخبار",
+                rulesTitle: "📋 القواعد واللوائح",
+                contactTitle: "📞 تواصل معنا",
+                settingsTitle: "⚙️ الإعدادات"
+            },
+            en: {
+                schoolName: "Secondary School 139", 
+                home: "🏠 Home",
+                management: "👑 Management",
+                teachers: "👩‍🏫 Teachers", 
+                students: "👩‍🎓 Students",
+                creators: "🌟 Creators",
+                achievements: "🏆 Achievements",
+                events: "🎉 Events",
+                platforms: "🌐 Platforms", 
+                news: "📰 News",
+                rules: "📋 Rules & Regulations",
+                contact: "📞 Contact Us",
+                settings: "⚙️ Settings",
+                homeTitle: "🏠 Home",
+                managementTitle: "👑 School Management",
+                teachersTitle: "👩‍🏫 Teaching Staff",
+                studentsTitle: "👩‍🎓 Students",
+                creatorsTitle: "🌟 Creators",
+                achievementsTitle: "🏆 Achievements", 
+                eventsTitle: "🎉 Events",
+                platformsTitle: "🌐 E-Learning Platforms",
+                newsTitle: "📰 Latest News",
+                rulesTitle: "📋 Rules & Regulations",
+                contactTitle: "📞 Contact Us",
+                settingsTitle: "⚙️ Settings"
+            }
+        };
+
+        // بيانات الشرائح للمبدعين
+        const creatorsData = {
+            art: [
+                { 
+                    name: "سارة أحمد", 
+                    quote: "الفن هو اللغة التي تتحدث بها الروح بدون كلمات",
+                    avatar: "🎨"
+                },
+                { 
+                    name: "لمى محمد", 
+                    quote: "كل لوحة ترسمها هي جزء من قلبي على القماش",
+                    avatar: "🖌️"
+                },
+                { 
+                    name: "ياسمين خالد", 
+                    quote: "الألوان هي مشاعري والأشكال هي أفكاري",
+                    avatar: "🎭"
+                },
+                { 
+                    name: "نورا سعيد", 
+                    quote: "الإبداع هو أن ترى العالم بطريقة لا يراها الآخرون",
+                    avatar: "👩‍🎨"
+                },
+                { 
+                    name: "جنى عبدالله", 
+                    quote: "الفن يجعل الحياة أجمل ويملؤها بالألوان",
+                    avatar: "🌈"
+                }
+            ],
+            programming: [
+                { 
+                    name: "رنا التميمي", 
+                    quote: "البرمجة هي فن حل المشكلات بطريقة إبداعية",
+                    avatar: "💻"
+                },
+                { 
+                    name: "شهد الغامدي", 
+                    quote: "كل سطر كود هو خطوة نحو المستقبل",
+                    avatar: "👩‍💻"
+                },
+                { 
+                    name: "داليا الحربي", 
+                    quote: "التقنية هي لغتي والإبداع هو برمجتي",
+                    avatar: "🚀"
+                },
+                { 
+                    name: "لين العتيبي", 
+                    quote: "أحول الأفكار إلى تطبيقات تغير العالم",
+                    avatar: "⚡"
+                },
+                { 
+                    name: "ريم الشمري", 
+                    quote: "البرمجة هي الرسم بالكود والإبداع بالمنطق",
+                    avatar: "🎯"
+                }
+            ],
+            writing: [
+                { 
+                    name: "فاطمة القحطاني", 
+                    quote: "الكلمات هي فرشاتي والحروف هي ألواني",
+                    avatar: "✍️"
+                },
+                { 
+                    name: "أسماء الرشيد", 
+                    quote: "كل قصة تكتبها هي عالم جديد تخلقه",
+                    avatar: "📖"
+                },
+                { 
+                    name: "هند السعد", 
+                    quote: "الأدب هو مرآة المجتمع والكاتب هو من يمسك بتلك المرآة",
+                    avatar: "📚"
+                },
+                { 
+                    name: "نوف العلي", 
+                    quote: "الكلمات لها قوة تغير العالم وتحرك المشاعر",
+                    avatar: "🖋️"
+                },
+                { 
+                    name: "الجوهرة المطيري", 
+                    quote: "الكتابة هي رحلة استكشاف للذات والعالم",
+                    avatar: "🌟"
+                }
+            ]
+        };
+
+        // وظائف جدول الاختبارات
+        function showExamTable() {
+            document.getElementById('examTableModal').style.display = 'flex';
+        }
+
+        function closeExamTable() {
+            document.getElementById('examTableModal').style.display = 'none';
+        }
+
+        // إغلاق النافذة عند النقر خارجها
+        document.addEventListener('click', function(event) {
+            const modal = document.getElementById('examTableModal');
+            if (event.target === modal) {
+                closeExamTable();
+            }
+        });
+
+        // وظيفة تهيئة الشرائح
+        function initializeSwipers() {
+            // تهيئة سوبر الإبداع الفني
+            if (document.querySelector('.artSwiper')) {
+                new Swiper('.artSwiper', {
+                    slidesPerView: 1,
+                    spaceBetween: 30,
+                    navigation: {
+                        nextEl: '.artSwiper .swiper-button-next',
+                        prevEl: '.artSwiper .swiper-button-prev',
+                    },
+                    loop: true,
+                    autoplay: {
+                        delay: 4000,
+                        disableOnInteraction: false,
+                    },
+                });
+            }
+
+            // تهيئة سوبر البرمجة
+            if (document.querySelector('.programmingSwiper')) {
+                new Swiper('.programmingSwiper', {
+                    slidesPerView: 1,
+                    spaceBetween: 30,
+                    navigation: {
+                        nextEl: '.programmingSwiper .swiper-button-next',
+                        prevEl: '.programmingSwiper .swiper-button-prev',
+                    },
+                    loop: true,
+                    autoplay: {
+                        delay: 4000,
+                        disableOnInteraction: false,
+                    },
+                });
+            }
+
+            // تهيئة سوبر الكتابة
+            if (document.querySelector('.writingSwiper')) {
+                new Swiper('.writingSwiper', {
+                    slidesPerView: 1,
+                    spaceBetween: 30,
+                    navigation: {
+                        nextEl: '.writingSwiper .swiper-button-next',
+                        prevEl: '.writingSwiper .swiper-button-prev',
+                    },
+                    loop: true,
+                    autoplay: {
+                        delay: 4000,
+                        disableOnInteraction: false,
+                    },
+                });
+            }
+        }
+
+        // وظيفة تعبئة الشرائح
+        function populateCreatorSlides() {
+            // تعبئة الإبداع الفني
+            const artSwiper = document.querySelector('.artSwiper .swiper-wrapper');
+            if (artSwiper) {
+                artSwiper.innerHTML = creatorsData.art.map(creator => `
+                    <div class="swiper-slide">
+                        <div class="creator-slide-avatar">
+                            ${creator.avatar}
+                        </div>
+                        <h3 class="creator-slide-name">${creator.name}</h3>
+                        <p>طالبة مبدعة في الفن والرسم</p>
+                        <div class="creator-slide-quote">
+                            "${creator.quote}"
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // تعبئة البرمجة
+            const programmingSwiper = document.querySelector('.programmingSwiper .swiper-wrapper');
+            if (programmingSwiper) {
+                programmingSwiper.innerHTML = creatorsData.programming.map(creator => `
+                    <div class="swiper-slide">
+                        <div class="creator-slide-avatar">
+                            ${creator.avatar}
+                        </div>
+                        <h3 class="creator-slide-name">${creator.name}</h3>
+                        <p>طالبة مبدعة في البرمجة والتقنية</p>
+                        <div class="creator-slide-quote">
+                            "${creator.quote}"
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // تعبئة الكتابة
+            const writingSwiper = document.querySelector('.writingSwiper .swiper-wrapper');
+            if (writingSwiper) {
+                writingSwiper.innerHTML = creatorsData.writing.map(creator => `
+                    <div class="swiper-slide">
+                        <div class="creator-slide-avatar">
+                            ${creator.avatar}
+                        </div>
+                        <h3 class="creator-slide-name">${creator.name}</h3>
+                        <p>طالبة مبدعة في الكتابة والأدب</p>
+                        <div class="creator-slide-quote">
+                            "${creator.quote}"
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // وظيفة تغيير اللغة
+        function changeLanguage(lang) {
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            
+            // تحديث النصوص
+            document.querySelector('.logo h1').textContent = translations[lang].schoolName;
+            
+            // تحديث القائمة
+            const navLinks = document.querySelectorAll('.nav-link');
+            const menuItems = ['home', 'management', 'teachers', 'students', 'creators', 
+                              'achievements', 'events', 'platforms', 'news', 'rules', 'contact', 'settings'];
+            
+            navLinks.forEach((link, index) => {
+                if (menuItems[index]) {
+                    link.textContent = translations[lang][menuItems[index]];
+                    link.setAttribute('data-section', menuItems[index]);
+                }
+            });
+            
+            // تحديث العناوين
+            const sections = ['home', 'management', 'teachers', 'students', 'creators', 
+                             'achievements', 'events', 'platforms', 'news', 'rules', 'contact', 'settings'];
+            
+            document.querySelectorAll('.section-title').forEach((title, index) => {
+                if (sections[index] && translations[lang][sections[index] + 'Title']) {
+                    title.textContent = translations[lang][sections[index] + 'Title'];
+                }
+            });
+
+            // تحديث العنواين الفرعية
+            document.querySelectorAll('.section-subtitle').forEach((subtitle, index) => {
+                if (lang === 'en') {
+                    const englishSubtitles = [
+                        "Towards innovative education that builds future generations",
+                        "Leadership team of 20 administrative staff", 
+                        "Distinguished team of 45 teachers with high experience in education and creativity",
+                        "✨ We are proud of our students' excellence in all fields ✨",
+                        "Space for creativity, excellence and innovation",
+                        "School and student achievements at the regional level",
+                        "School events and student activities",
+                        "Official platforms of the Ministry of Education",
+                        "Latest school news and announcements",
+                        "Student guide for behavior, attendance and school regulations", 
+                        "We are here to help you and answer your inquiries",
+                        "Customize your browsing experience according to your preferences"
+                    ];
+                    if (englishSubtitles[index]) {
+                        subtitle.textContent = englishSubtitles[index];
+                    }
+                } else {
+                    const arabicSubtitles = [
+                        "نحو تعليم مبتكر يبني أجيال المستقبل",
+                        "فريق الإدارة القيادي المكون من 20 إدارية",
+                        "فريق متميز من 45 معلمة بخبرة عالية في التعليم والإبداع", 
+                        "✨ نفتخر بتميز طالباتنا في جميع المجالات ✨",
+                        "مساحة للإبداع والتميز والابتكار",
+                        "إنجازات المدرسة والطالبات على مستوى المنطقة",
+                        "الفعاليات المدرسية والأنشطة الطلابية",
+                        "المنصات الرسمية التابعة لوزارة التعليم",
+                        "أحدث المستجدات والأخبار والإعلانات المدرسية", 
+                        "دليل الطالبات للسلوك والمواظبة والأنظمة المدرسية",
+                        "نحن هنا لمساعدتك ونجيب على استفساراتك",
+                        "تخصيص تجربة التصفح حسب تفضيلاتك"
+                    ];
+                    if (arabicSubtitles[index]) {
+                        subtitle.textContent = arabicSubtitles[index];
+                    }
+                }
+            });
+            
+            localStorage.setItem('language', lang);
+        }
+
         // بيانات الإدارة
         const managementData = [
             { name: "أ. فاطمة أحمد", position: "مديرة المدرسة", experience: "20 سنة", contact: "fatima@school139.edu.sa" },
@@ -1540,98 +2833,278 @@
             { name: "أ. فوزية الزهراني", subject: "التربية البدنية", experience: "4 سنوات" }
         ];
 
-        // بيانات الطالبات
+        // بيانات الطالبات - محدث (تم حذف ثالث ثانوي من المنظبطات)
         const studentsData = {
-            excellent: [
-                { name: "سارة أحمد", grade: "الصف الثالث", average: "98.5%" },
-                { name: "نورة محمد", grade: "الصف الثاني", average: "97.8%" },
-                { name: "لمى عبدالله", grade: "الصف الأول", average: "99.2%" },
-                { name: "هدى الخالد", grade: "الصف الثالث", average: "96.9%" }
-            ],
-            creative: [
-                { name: "أسماء العتيبي", grade: "الصف الثاني", talent: "الرسم والتصميم" },
-                { name: "ريم الحربي", grade: "الصف الأول", talent: "البرمجة والروبوتات" },
-                { name: "فاطمة الغامدي", grade: "الصف الثالث", talent: "الكتابة الإبداعية" },
-                { name: "جواهر القحطاني", grade: "الصف الثاني", talent: "الخطابة والإلقاء" }
-            ],
-            attendance: [
-                { name: "عبير السعد", grade: "الصف الأول", attendance: "100%" },
-                { name: "نوف الرشيد", grade: "الصف الثالث", attendance: "99.8%" },
-                { name: "ديمة المطيري", grade: "الصف الثاني", attendance: "100%" },
-                { name: "غادة الشمري", grade: "الصف الأول", attendance: "99.5%" }
-            ]
+            disciplined: {
+                firstGrade: [
+                    { name: "رتال محمد العتيبي", motivation: "الانضباط طريق التميز والإبداع" },
+                    { name: "عروب فيصل فهد", motivation: "نبراس الانضباط والإلتزام" },
+                    { name: "فاطمه عاتد", motivation: "قدوة في النظام والانضباط" },
+                    { name: "مزون موسى شعيب", motivation: "الانضباط سر النجاح" },
+                    { name: "هند طلال الحارثي", motivation: "مثال يحتذى به في الانضباط" },
+                    { name: "دانا سبيب محسن", motivation: "الانضباط سر التميز" },
+                    { name: "رهف صادق حميد", motivation: "نبراس الانضباط والإلتزام" },
+                    { name: "ريوف ظافر حمد", motivation: "قدوة في النظام والانضباط" },
+                    { name: "غنى بسام", motivation: "الانضباط طريق النجاح" },
+                    { name: "لانا مزعل العنزي", motivation: "مثال يحتذى به في الانضباط" },
+                    { name: "موده محمد الحسن", motivation: "الانضباط أسلوب حياة" },
+                    { name: "اسيل محمود شاهين", motivation: "نموذج للإلتزام والتفاني" },
+                    { name: "ميار عبد الله مطلق", motivation: "الانضباط سر التفوق" },
+                    { name: "حصه فهد الرشيد", motivation: "قدوة في النظام والانضباط" },
+                    { name: "رزان تركي المطيري", motivation: "الانضباط طريق التميز" },
+                    { name: "رزان صابر شبيلي", motivation: "نبراس الانضباط والإلتزام" },
+                    { name: "رغد اشرف صلاح", motivation: "مثال يحتذى به في الانضباط" },
+                    { name: "شموخ تركي السهلي", motivation: "الانضباط أسلوب حياة" },
+                    { name: "ميرال مبارك علي", motivation: "نموذج للإلتزام والتفاني" }
+                ],
+                secondGrade: [
+                    { name: "بصيره جلال الدين", motivation: "نموذج للإلتزام والتفاني" },
+                    { name: "خلود هادي القحطاني", motivation: "الانضباط أسلوب حياة" },
+                    { name: "ملاذ عبد الله الغامدي", motivation: "قدوة في النظام والانضباط" },
+                    { name: "جنى عبد الله مرفوع", motivation: "الانضباط طريق النجاح" },
+                    { name: "حور عبد الله عايد العنزي", motivation: "نبراس الانضباط والإلتزام" },
+                    { name: "رغد محمد زياد", motivation: "مثال يحتذى به في الانضباط" },
+                    { name: "ريم مبارك البدوي", motivation: "الانضباط سر التميز" },
+                    { name: "ليان محمد هيثم", motivation: "نموذج للإلتزام والتفاني" },
+                    { name: "بانه سيد احمد", motivation: "الانضباط أسلوب حياة" },
+                    { name: "رغد ماجد عبدالله", motivation: "قدوة في النظام والانضباط" },
+                    { name: "لمار علي سليمان", motivation: "الانضباط طريق النجاح" },
+                    { name: "مروه فريد علي", motivation: "نبراس الانضباط والإلتزام" }
+                ]
+                // تم حذف ثالث ثانوي من المنظبطات
+            },
+            excellent: {
+                firstGrade: [
+                    { name: "رغد اشرف صلا السيد", motivation: "التفوق ليس صدفة بل اختيار" },
+                    { name: "تقى اسامه حاج نعمه", motivation: "نجوم تتألق في سماء التميز" },
+                    { name: "رنا عبد العزيز محمد القحطاني", motivation: "التميز عنواني والإبداع طريقي" },
+                    { name: "رتال محمد عبد الرحمن عبد الله", motivation: "الإصرار طريق التفوق" },
+                    { name: "سلوى احمد عبد الكريم الكبدي", motivation: "التميز صناعة ذاتية" },
+                    { name: "موده محمد الحسن", motivation: "التفوق ثمرة الجد والاجتهاد" },
+                    { name: "معاني فخري محمد", motivation: "التميز عادة والإبداع خيار" },
+                    { name: "لمى عدنان العواضي", motivation: "نجوم تتألق في سماء التميز" },
+                    { name: "هيا محمد النفيعي", motivation: "الإصرار طريق التفوق" },
+                    { name: "جنى مصطفى", motivation: "التميز صناعة ذاتية" },
+                    { name: "ربى نايف المطيري", motivation: "التفوق ثمرة الجد والاجتهاد" },
+                    { name: "ربى حسن العنزي", motivation: "التميز عادة والإبداع خيار" },
+                    { name: "جمانه خالد المطيري", motivation: "نجوم تتألق في سماء التميز" },
+                    { name: "وسن ناصر المطيري", motivation: "الإصرار طريق التفوق" },
+                    { name: "رزان مساعد الهاجري", motivation: "التميز صناعة ذاتية" },
+                    { name: "رسيل حمود الغامدي", motivation: "التفوق ثمرة الجد والاجتهاد" },
+                    { name: "ميار فايز العنزي", motivation: "التميز عادة والإبداع خيار" },
+                    { name: "جوري سعد البقمي", motivation: "نجوم تتألق في سماء التميز" },
+                    { name: "منال معيض العتيبي", motivation: "الإصرار طريق التفوق" }
+                ],
+                secondGrade: [
+                    { name: "رنا ماجد السواط", motivation: "التميز صناعة ذاتية" },
+                    { name: "اسيل سليمان محمد", motivation: "الإصرار طريق التفوق" },
+                    { name: "رهف علي الغروي", motivation: "التفوق ثمرة الجد والاجتهاد" },
+                    { name: "جنان نواف المطيري", motivation: "التميز عادة والإبداع خيار" },
+                    { name: "ياسمين محمد القحطاني", motivation: "نجوم تتألق في سماء التميز" },
+                    { name: "جود خالد غنام", motivation: "الإصرار طريق التفوق" },
+                    { name: "ترتيل زاهد الطاهر", motivation: "التميز صناعة ذاتية" },
+                    { name: "لمار احمد الجهني", motivation: "التفوق ثمرة الجد والاجتهاد" },
+                    { name: "ليان محمد هيثم", motivation: "التميز عادة والإبداع خيار" },
+                    { name: "غنى غازي العتيبي", motivation: "نجوم تتألق في سماء التميز" },
+                    { name: "بانه سيد احمد", motivation: "الإصرار طريق التفوق" },
+                    { name: "غنى محمد العتيبي", motivation: "التميز صناعة ذاتية" },
+                    { name: "الاء هاني احمد", motivation: "التفوق ثمرة الجد والاجتهاد" }
+                ],
+                thirdGrade: [
+                    { name: "جنى علي البطاح", motivation: "التفوق ثمرة الجد والاجتهاد" },
+                    { name: "ريماس اسلم مبارك", motivation: "التميز عادة والإبداع خيار" },
+                    { name: "سبا علي الخطاب", motivation: "نجوم تتألق في سماء التميز" },
+                    { name: "سديم سعود المطيري", motivation: "الإصرار طريق التفوق" },
+                    { name: "هند محمد الشهري", motivation: "التميز صناعة ذاتية" },
+                    { name: "سفانه رايد صالح", motivation: "التفوق ثمرة الجد والاجتهاد" },
+                    { name: "وسن ناصر الميموني", motivation: "التميز عادة والإبداع خيار" },
+                    { name: "افنان حسين عبد الكريم", motivation: "نجوم تتألق في سماء التميز" },
+                    { name: "لانا بدر المطيري", motivation: "الإصرار طريق التفوق" },
+                    { name: "يارا سعد البقمي", motivation: "التميز صناعة ذاتية" },
+                    { name: "دارين ابراهيم الوايلي", motivation: "التفوق ثمرة الجد والاجتهاد" },
+                    { name: "ريتال سالم شيبان", motivation: "التميز عادة والإبداع خيار" },
+                    { name: "لانا الايهم امرير", motivation: "نجوم تتألق في سماء التميز" },
+                    { name: "مريم سعد الفهد", motivation: "الإصرار طريق التفوق" },
+                    { name: "جنى نايف المطيري", motivation: "التميز صناعة ذاتية" },
+                    { name: "رنيم عايض الشهراني", motivation: "التفوق ثمرة الجد والاجتهاد" },
+                    { name: "دانه ناصر الغيلان", motivation: "التميز عادة والإبداع خيار" },
+                    { name: "جنى عبد الله العتيبي", motivation: "نجوم تتألق في سماء التميز" }
+                ]
+            }
         };
 
         // وظيفة تعبئة الإدارة
         function populateManagement() {
             const container = document.getElementById('managementContainer');
-            container.innerHTML = managementData.map(person => `
-                <div class="management-card">
-                    <div class="management-avatar">
-                        <i class="fas fa-user-tie"></i>
+            if (container) {
+                container.innerHTML = managementData.map(person => `
+                    <div class="management-card">
+                        <div class="management-avatar">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="management-info">
+                            <h3>${person.name}</h3>
+                            <p>${person.position}</p>
+                            <span class="management-experience">${person.experience}</span>
+                        </div>
+                        <div class="management-contact">
+                            <a href="mailto:${person.contact}" class="contact-link">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="#" class="contact-link">
+                                <i class="fas fa-phone"></i>
+                            </a>
+                        </div>
                     </div>
-                    <div class="management-info">
-                        <h3>${person.name}</h3>
-                        <p>${person.position}</p>
-                        <span class="management-experience">${person.experience}</span>
-                    </div>
-                    <div class="management-contact">
-                        <a href="mailto:${person.contact}" class="contact-link">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                        <a href="#" class="contact-link">
-                            <i class="fas fa-phone"></i>
-                        </a>
-                    </div>
-                </div>
-            `).join('');
+                `).join('');
+            }
         }
 
         // وظيفة تعبئة المعلمات
         function populateTeachers() {
             const container = document.getElementById('teachersContainer');
-            container.innerHTML = teachersData.map(teacher => `
-                <div class="teacher-card">
-                    <div class="teacher-avatar">
-                        <i class="fas fa-chalkboard-teacher"></i>
+            if (container) {
+                container.innerHTML = teachersData.map(teacher => `
+                    <div class="teacher-card">
+                        <div class="teacher-avatar">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <div class="teacher-info">
+                            <h3>${teacher.name}</h3>
+                            <span class="teacher-subject">${teacher.subject}</span>
+                            <p>${teacher.experience} خبرة</p>
+                        </div>
                     </div>
-                    <div class="teacher-info">
-                        <h3>${teacher.name}</h3>
-                        <span class="teacher-subject">${teacher.subject}</span>
-                        <p>${teacher.experience} خبرة</p>
-                    </div>
-                </div>
-            `).join('');
+                `).join('');
+            }
         }
 
         // وظيفة تعبئة الطالبات
         function populateStudents() {
-            Object.keys(studentsData).forEach(category => {
-                const container = document.getElementById(category);
-                container.innerHTML = studentsData[category].map((student, index) => {
-                    const medalClass = index === 0 ? 'gold' : index === 1 ? 'silver' : 'bronze';
-                    let extraInfo = '';
-                    
-                    if (category === 'excellent') {
-                        extraInfo = `<p>المعدل: ${student.average}</p>`;
-                    } else if (category === 'creative') {
-                        extraInfo = `<p>الموهبة: ${student.talent}</p>`;
-                    } else if (category === 'attendance') {
-                        extraInfo = `<p>نسبة الحضور: ${student.attendance}</p>`;
-                    }
-                    
-                    return `
-                        <div class="student-card ${medalClass}">
-                            <div class="student-avatar">
+            const disciplinedContainer = document.getElementById('disciplined');
+            const excellentContainer = document.getElementById('excellent');
+
+            if (disciplinedContainer) {
+                let disciplinedHTML = '';
+                
+                // الصف الأول ثانوي - المنظبطات
+                disciplinedHTML += `
+                    <div style="grid-column: 1 / -1; text-align: center; margin: 40px 0 25px;">
+                        <h3 style="color: #4ECDC4; font-size: 2rem; background: linear-gradient(135deg, #4ECDC4, #45B7D1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; padding: 15px; border-radius: 15px; background: rgba(255,255,255,0.9);">🎓 الصف الأول ثانوي</h3>
+                    </div>
+                `;
+                
+                studentsData.disciplined.firstGrade.forEach(student => {
+                    disciplinedHTML += `
+                        <div class="student-card">
+                            <div class="student-avatar" style="background: linear-gradient(135deg, #${Math.random().toString(16).substr(-6)}, #${Math.random().toString(16).substr(-6)});">
                                 <i class="fas fa-user-graduate"></i>
                             </div>
-                            <h3>${student.name}</h3>
-                            <p>${student.grade}</p>
-                            ${extraInfo}
+                            <div class="student-info">
+                                <h3 class="student-name">${student.name}</h3>
+                                <p class="student-grade">🎯 الصف الأول ثانوي</p>
+                                <p class="motivation-text">"${student.motivation}" 🌟</p>
+                            </div>
                         </div>
                     `;
-                }).join('');
-            });
+                });
+
+                // الصف الثاني ثانوي - المنظبطات
+                disciplinedHTML += `
+                    <div style="grid-column: 1 / -1; text-align: center; margin: 50px 0 25px;">
+                        <h3 style="color: #FF6B6B; font-size: 2rem; background: linear-gradient(135deg, #FF6B6B, #FFA500); -webkit-background-clip: text; -webkit-text-fill-color: transparent; padding: 15px; border-radius: 15px; background: rgba(255,255,255,0.9);">🎓 الصف الثاني ثانوي</h3>
+                    </div>
+                `;
+                
+                studentsData.disciplined.secondGrade.forEach(student => {
+                    disciplinedHTML += `
+                        <div class="student-card">
+                            <div class="student-avatar" style="background: linear-gradient(135deg, #${Math.random().toString(16).substr(-6)}, #${Math.random().toString(16).substr(-6)});">
+                                <i class="fas fa-user-graduate"></i>
+                            </div>
+                            <div class="student-info">
+                                <h3 class="student-name">${student.name}</h3>
+                                <p class="student-grade">🎯 الصف الثاني ثانوي</p>
+                                <p class="motivation-text">"${student.motivation}" 🌟</p>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                disciplinedContainer.innerHTML = disciplinedHTML;
+            }
+
+            if (excellentContainer) {
+                let excellentHTML = '';
+                
+                // الصف الأول ثانوي - المتفوقات
+                excellentHTML += `
+                    <div style="grid-column: 1 / -1; text-align: center; margin: 40px 0 25px;">
+                        <h3 style="color: #FFD700; font-size: 2rem; background: linear-gradient(135deg, #FFD700, #FFA500); -webkit-background-clip: text; -webkit-text-fill-color: transparent; padding: 15px; border-radius: 15px; background: rgba(255,255,255,0.9);">🎓 الصف الأول ثانوي</h3>
+                    </div>
+                `;
+                
+                studentsData.excellent.firstGrade.forEach(student => {
+                    excellentHTML += `
+                        <div class="student-card gold">
+                            <div class="student-avatar" style="background: linear-gradient(135deg, #FFD700, #FFA500);">
+                                <i class="fas fa-crown"></i>
+                            </div>
+                            <div class="student-info">
+                                <h3 class="student-name">${student.name}</h3>
+                                <p class="student-grade">🏆 الصف الأول ثانوي</p>
+                                <p class="motivation-text">"${student.motivation}" ⭐</p>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                // الصف الثاني ثانوي - المتفوقات
+                excellentHTML += `
+                    <div style="grid-column: 1 / -1; text-align: center; margin: 50px 0 25px;">
+                        <h3 style="color: #C0C0C0; font-size: 2rem; background: linear-gradient(135deg, #C0C0C0, #808080); -webkit-background-clip: text; -webkit-text-fill-color: transparent; padding: 15px; border-radius: 15px; background: rgba(255,255,255,0.9);">🎓 الصف الثاني ثانوي</h3>
+                    </div>
+                `;
+                
+                studentsData.excellent.secondGrade.forEach(student => {
+                    excellentHTML += `
+                        <div class="student-card silver">
+                            <div class="student-avatar" style="background: linear-gradient(135deg, #C0C0C0, #A9A9A9);">
+                                <i class="fas fa-crown"></i>
+                            </div>
+                            <div class="student-info">
+                                <h3 class="student-name">${student.name}</h3>
+                                <p class="student-grade">🏆 الصف الثاني ثانوي</p>
+                                <p class="motivation-text">"${student.motivation}" ⭐</p>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                // الصف الثالث ثانوي - المتفوقات
+                excellentHTML += `
+                    <div style="grid-column: 1 / -1; text-align: center; margin: 50px 0 25px;">
+                        <h3 style="color: #CD7F32; font-size: 2rem; background: linear-gradient(135deg, #CD7F32, #8B4513); -webkit-background-clip: text; -webkit-text-fill-color: transparent; padding: 15px; border-radius: 15px; background: rgba(255,255,255,0.9);">🎓 الصف الثالث ثانوي</h3>
+                    </div>
+                `;
+                
+                studentsData.excellent.thirdGrade.forEach(student => {
+                    excellentHTML += `
+                        <div class="student-card bronze">
+                            <div class="student-avatar" style="background: linear-gradient(135deg, #CD7F32, #8B4513);">
+                                <i class="fas fa-crown"></i>
+                            </div>
+                            <div class="student-info">
+                                <h3 class="student-name">${student.name}</h3>
+                                <p class="student-grade">🏆 الصف الثالث ثانوي</p>
+                                <p class="motivation-text">"${student.motivation}" ⭐</p>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                excellentContainer.innerHTML = excellentHTML;
+            }
         }
 
         // وظيفة التنقل بين الأقسام
@@ -1644,7 +3117,8 @@
                     e.preventDefault();
                     
                     // إغلاق القائمة في الجوال
-                    if (window.innerWidth <= 768) {
+                    const navbar = document.getElementById('navbar');
+                    if (window.innerWidth <= 768 && navbar) {
                         navbar.classList.remove('active');
                     }
                     
@@ -1679,25 +3153,49 @@
             });
         }
 
+        // وظيفة التبويبات في قسم المبدعين
+        function setupCreatorTabs() {
+            const tabBtns = document.querySelectorAll('.creator-tab-btn');
+            const categories = document.querySelectorAll('.creator-category');
+
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // إزالة النشاط من جميع الأزرار والفئات
+                    tabBtns.forEach(tab => tab.classList.remove('active'));
+                    categories.forEach(cat => cat.classList.remove('active'));
+                    
+                    // إضافة النشاط للزر والفئة المحددة
+                    btn.classList.add('active');
+                    const categoryId = btn.getAttribute('data-creator-category');
+                    document.getElementById(categoryId).classList.add('active');
+                    
+                    // إعادة تهيئة السوبر عند التبديل
+                    setTimeout(initializeSwipers, 100);
+                });
+            });
+        }
+
         // وظيفة الوضع الليلي
         function setupDarkMode() {
             const darkModeToggle = document.getElementById('darkModeToggle');
             const savedMode = localStorage.getItem('darkMode') || 'light';
             
-            darkModeToggle.value = savedMode;
-            if (savedMode === 'dark') {
-                document.body.classList.add('dark-mode');
-            }
-            
-            darkModeToggle.addEventListener('change', (e) => {
-                if (e.target.value === 'dark') {
+            if (darkModeToggle) {
+                darkModeToggle.value = savedMode;
+                if (savedMode === 'dark') {
                     document.body.classList.add('dark-mode');
-                    localStorage.setItem('darkMode', 'dark');
-                } else {
-                    document.body.classList.remove('dark-mode');
-                    localStorage.setItem('darkMode', 'light');
                 }
-            });
+                
+                darkModeToggle.addEventListener('change', (e) => {
+                    if (e.target.value === 'dark') {
+                        document.body.classList.add('dark-mode');
+                        localStorage.setItem('darkMode', 'dark');
+                    } else {
+                        document.body.classList.remove('dark-mode');
+                        localStorage.setItem('darkMode', 'light');
+                    }
+                });
+            }
         }
 
         // وظيفة حفظ الإعدادات
@@ -1705,16 +3203,32 @@
             const darkMode = document.getElementById('darkModeToggle').value;
             const notifications = document.getElementById('notificationsToggle').value;
             const fontSize = document.getElementById('fontSizeToggle').value;
+            const language = document.querySelector('input[name="language"]:checked').value;
             
             localStorage.setItem('darkMode', darkMode);
             localStorage.setItem('notifications', notifications);
             localStorage.setItem('fontSize', fontSize);
+            localStorage.setItem('language', language);
+            
+            // تطبيق اللغة
+            changeLanguage(language);
             
             // تطبيق حجم الخط
             document.body.style.fontSize = fontSize === 'small' ? '14px' : 
                                          fontSize === 'large' ? '18px' : '16px';
             
-            alert('✅ تم حفظ الإعدادات بنجاح!');
+            // تطبيق الوضع الليلي
+            if (darkMode === 'dark') {
+                document.body.classList.add('dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+            }
+            
+            if (language === 'en') {
+                alert('✅ Settings saved successfully!');
+            } else {
+                alert('✅ تم حفظ الإعدادات بنجاح!');
+            }
         }
 
         // وظيفة قائمة الهامبرجر
@@ -1722,18 +3236,20 @@
             const menuToggle = document.getElementById('menuToggle');
             const navbar = document.getElementById('navbar');
 
-            menuToggle.addEventListener('click', () => {
-                navbar.classList.toggle('active');
-                menuToggle.classList.toggle('active');
-            });
+            if (menuToggle && navbar) {
+                menuToggle.addEventListener('click', () => {
+                    navbar.classList.toggle('active');
+                    menuToggle.classList.toggle('active');
+                });
 
-            // إغلاق القائمة عند النقر خارجها
-            document.addEventListener('click', (e) => {
-                if (!navbar.contains(e.target) && !menuToggle.contains(e.target)) {
-                    navbar.classList.remove('active');
-                    menuToggle.classList.remove('active');
-                }
-            });
+                // إغلاق القائمة عند النقر خارجها
+                document.addEventListener('click', (e) => {
+                    if (!navbar.contains(e.target) && !menuToggle.contains(e.target)) {
+                        navbar.classList.remove('active');
+                        menuToggle.classList.remove('active');
+                    }
+                });
+            }
         }
 
         // تهيئة التطبيق عند تحميل الصفحة
@@ -1741,19 +3257,33 @@
             populateManagement();
             populateTeachers();
             populateStudents();
+            populateCreatorSlides();
+            initializeSwipers();
             setupNavigation();
             setupStudentTabs();
+            setupCreatorTabs();
             setupDarkMode();
             setupMobileMenu();
             
             // تحميل الإعدادات المحفوظة
             const savedFontSize = localStorage.getItem('fontSize') || 'medium';
             const savedNotifications = localStorage.getItem('notifications') || 'on';
+            const savedLanguage = localStorage.getItem('language') || 'ar';
+            const savedDarkMode = localStorage.getItem('darkMode') || 'light';
             
             document.getElementById('fontSizeToggle').value = savedFontSize;
             document.getElementById('notificationsToggle').value = savedNotifications;
+            document.querySelector(`input[value="${savedLanguage}"]`).checked = true;
+            document.getElementById('darkModeToggle').value = savedDarkMode;
+            
             document.body.style.fontSize = savedFontSize === 'small' ? '14px' : 
                                          savedFontSize === 'large' ? '18px' : '16px';
+            
+            if (savedDarkMode === 'dark') {
+                document.body.classList.add('dark-mode');
+            }
+            
+            changeLanguage(savedLanguage);
         });
     </script>
 </body>
