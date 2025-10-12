@@ -1846,7 +1846,19 @@
     <section id="home" class="active">
         <div class="container">
             <div class="hero-section">
-                <h2 style="font-size: 3.5em; margin-bottom: 20px; background: linear-gradient(135deg, #FF6B6B, #4ECDC4, #45B7D1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🎓 الثانوية 139</h2>
+
+<h2 style="
+  font-size: 3.5em;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #FF6B6B, #4ECDC4, #45B7D1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  display: inline-block;
+">
+  🎓 الثانوية 139
+</h2>
                 <p style="font-size: 1.5em; color: #666;">نحو تعليم مبتكر يبني أجيال المستقبل</p>
             </div>
 
@@ -2035,16 +2047,30 @@
 
             <div class="events-grid">
                 <div class="event-card">
-                    <h3>يوم المعلم 💫💫</h3>
-                    <p>احتفال تكريمي لمعلمات المدرسة تقديراً لجهودهن المتميزة</p>
-                    <span class="event-date">قريباً</span>
+                    <h3>مسابقة برنامج رفق لمناهضة التنمر </h3>
+                    <p>تشمل مسابقه القصه القصيره ومسابقة اجمل لوحه</p>
+                    <span class="event-date">مستمره</span>
                 </div>
                 
                 <div class="event-card">
                     <h3>نشاط البوليفارد وورلد</h3>
-                    <p>فعالية ترفيهية مجانية 100% - الزي ساتر طويل محتشم</p>
+                    <p>فعالية ترفيهية مجانية 100%   </p>
                     <span class="event-date">قريباً</span>
                 </div>
+
+                 <div class="event-card">
+                    <h3>دوري المدارس السعوديه للرياضات الاكترونيه </h3>
+                    <p>اعلان بدء التسجيل في دوري المدارس للرياضات الاكترونيه</p>
+                    <span class="event-date">مستمر</span>
+                </div>
+
+                                 <div class="event-card">
+                    <h3>مسابقة بيبراس العالميه المعلوماتيه </h3>
+                    <p>مسابقة تعزز الفكر المعلوماتي تتكون من مجموعه اسئله تفاعليه  </p>
+                    <span class="event-date">انتهت</span>
+                </div>
+
+            
                 
                 <div class="event-card">
                     <h3>جلسات الأولمبياد الوطني</h3>
@@ -2052,11 +2078,20 @@
                     <span class="event-date">مستمر</span>
                 </div>
 
+                
+
                 <div class="event-card">
                     <h3>مسابقة موهبة</h3>
                     <p>فرصة للطالبات للانضمام لفصول الموهوبات واجتياز مقياس موهبة</p>
                     <span class="event-date">مستمر</span>
                 </div>
+
+                                <div class="event-card">
+                    <h3>اسبوع الفضاء العالمي </h3>
+                    <p>الشعار المعتمد على ان تكون المشاركات باللغه الانجليزيه </p>
+                    <span class="event-date">انتهت</span>
+                </div>
+
             </div>
         </div>
     </section>
@@ -2083,7 +2118,7 @@
                     </div>
                     <h3>منصة التطوع</h3>
                     <p>منصة العمل التطوعي التعليمي</p>
-                    <a href="https://volunteer.media.gov.sa" target="_blank" class="btn btn-secondary">الدخول للمنصة</a>
+                    <a href="https://entity.nvg.gov.sa" target="_blank" class="btn btn-secondary">الدخول للمنصة</a>
                 </div>
 
                 <div class="platform-card">
@@ -2117,6 +2152,136 @@
                     </div>
                 </div>
 
+                
+<!-- 🔹 بطاقة مهمة فدوى القاسم -->
+<div class="advertisement-card">
+  <div class="ad-image" style="background: linear-gradient(135deg, #FF6B6B, #4ECDC4);">
+    <i class="fas fa-calendar-alt"></i>
+  </div>
+
+  <div class="ad-content">
+    <h3 class="ad-title">مهمة فدوى القاسم</h3>
+    <p class="ad-description">
+      تفعيل العمل التطوعي في ضوء نظام مسارات المرحلة الثانوية
+    </p>
+    <a href="#" class="news-btn" onclick="openMissionModal()">📄 مشاهدة المهمة</a>
+  </div>
+</div>
+
+<!-- 🔸 النافذة المنبثقة (وثيقة فخمة) -->
+<div id="missionModal" style="
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.55);
+  backdrop-filter:blur(6px);
+  z-index:9999;
+  justify-content:center;
+  align-items:center;
+">
+  <div style="
+    background:#fff;
+    border-radius:20px;
+    max-width:600px;
+    width:90%;
+    padding:40px 35px;
+    position:relative;
+    font-family:'Cairo',sans-serif;
+    direction:rtl;
+    text-align:right;
+    box-shadow:0 8px 35px rgba(0,0,0,0.25);
+    overflow:hidden;
+  ">
+    <!-- شعار الوزارة الخلفي -->
+    <div style="
+      position:absolute;
+      inset:0;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/9/9d/Ministry_of_Education_KSA_Logo.svg') center/180px no-repeat;
+      opacity:0.05;
+      z-index:0;
+    "></div>
+
+    <!-- زر الإغلاق -->
+    <span onclick="closeMissionModal()" style="
+      position:absolute;
+      top:10px;
+      left:20px;
+      font-size:26px;
+      color:#555;
+      cursor:pointer;
+      z-index:10;
+      transition:0.3s;
+    " onmouseover="this.style.color='#FF6B6B'" onmouseout="this.style.color='#555'">✖</span>
+
+    <!-- محتوى الوثيقة -->
+    <div style="position:relative; z-index:5;">
+      <h2 style="
+        text-align:center;
+        background:linear-gradient(135deg,#FF6B6B,#4ECDC4,#45B7D1);
+        -webkit-background-clip:text;
+        -webkit-text-fill-color:transparent;
+        font-size:1.9em;
+        font-weight:700;
+        margin-bottom:20px;
+      ">📄 مهمة فدوى القاسم</h2>
+
+      <p style="text-align:center;font-size:1.2em;">﷽</p>
+      <p>السلام عليكم ورحمة الله وبركاته،</p>
+
+      <p>
+        نود إفادتكم بتسهيل مهمة الباحثة <strong>فدوى القاسم</strong>
+        حول موضوع <strong>تفعيل العمل التطوعي في ضوء نظام مسارات المرحلة الثانوية</strong>
+        بمدينة الرياض، خلال العام الدراسي <strong>1447هـ</strong>.
+      </p>
+
+      <p>
+        تشمل المهمة تطبيق استبانة عبر رمز الاستجابة السريعة (QR)،
+        بعد الحصول على موافقة ولي الأمر وفقاً للنموذج المعتمد.
+      </p>
+
+      <p>
+        نؤكد على سرية المعلومات المستخدمة في البحث العلمي،
+        وأن هذا التسهيل لا يعني موافقة الإدارة على منهجية الدراسة أو نتائجها.
+      </p>
+
+      <p style="margin-top:20px;font-weight:bold;">
+        إدارة التطوير والتحول – الإدارة العامة للتعليم بمنطقة الرياض
+      </p>
+
+      <!-- الباركود -->
+      <div style="text-align:center;margin-top:25px;">
+        <img 
+          src="https://api.qrserver.com/v1/create-qr-code/?data=https://forms.gle/T7yYyRhCkYtLzN9r8&size=150x150" 
+          alt="QR Code"
+          style="border:3px solid #4ECDC4;border-radius:10px;padding:5px;">
+        <p style="font-size:0.9em;color:#555;">امسح الرمز لفتح الاستبانة</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ✨ الحركات -->
+<style>
+@keyframes fadeIn {from{opacity:0;}to{opacity:1;}}
+@keyframes slideUp {from{transform:translateY(40px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+</style>
+
+<!-- 🧠 السكربت -->
+<script>
+function openMissionModal(){
+  const modal=document.getElementById("missionModal");
+  modal.style.display="flex";
+}
+function closeMissionModal(){
+  document.getElementById("missionModal").style.display="none";
+}
+</script>
+
+<!-- 🔹 بطاقة خطة الأسبوع الثامن -->
+
+
+
+                
                 <!-- الإعلانات الجديدة -->
                 <div class="advertisement-card">
                     <div class="ad-image" style="background: linear-gradient(135deg, #45B7D1, #96CEB4);">
@@ -2236,7 +2401,7 @@
                                     <td>الأربعاء 1447/4/25</td>
                                     <td>التربية الصحية والبدنية</td>
                                     <td>   ..............  </td>
-                                    <td> الرياضياتtd>
+                                    <td> الرياضيات<td>
                                 </tr>
                                                                 <tr>
                                     <td>الخميس  1447/4/25</td>
@@ -2261,6 +2426,11 @@
             </div>
         </div>
     </section>
+
+
+    
+
+    
 
     <!-- قسم القواعد واللوائح الجديد - محدث -->
     <section id="rules">
@@ -3286,5 +3456,7 @@
             changeLanguage(savedLanguage);
         });
     </script>
+
+
 </body>
 </html>
